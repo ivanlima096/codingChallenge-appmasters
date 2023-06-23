@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background-color: #141920;
+  padding: 1rem 2rem;
+  background-image: url("../img/gradiente.jpg");
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.56rem;
+}
+
+
+.navbar a {
+  text-decoration: none;
+  color: #F9F9F9;
+  transition: 300ms all ease;
+}
+
+.navbar a:hover {
+  color: #F7D354;
+}
+
+.navbar .logo svg {
+  font-size: 2.5rem;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 1.2rem;
+}
+
+
+@media (max-width: 430px) {
+  .navbar h2 {
+    display: none;
+  }
+}

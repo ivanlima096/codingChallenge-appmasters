@@ -1,0 +1,68 @@
+.game {
+  display: flex;
+  flex-direction: column-reverse;
+  background-image: url("../img/gradiente.jpg");
+  background-size: cover;
+  filter: blur(1);
+  backdrop-filter: opacity(.1);
+  object-fit: contain;
+  padding: .4rem;
+  border-radius: 10px;
+  width: 26rem;
+  box-shadow: 14px 10px 15px 1px rgba(0, 0, 0, 0.5);
+}
+
+.game:hover {
+  scale: 1.05;
+  transition: all 300ms ease-in-out;
+}
+
+.game img,
+.game h2,
+.game h5 {
+  margin-bottom: 0.5rem;
+  padding: .3rem;
+}
+
+.game h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.game img {
+  border-radius: 10px;
+}
+
+.game button {
+  background-color: #F7D354;
+  border: 2px solid #F7D354;
+  border-radius: 4px;
+  color: #232323;
+  padding: 0.6rem 0.3rem;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.game button:hover {
+  background-color: transparent;
+  color: #F7D354;
+}
+
+@media (max-width: 570px) {
+  .game {
+    max-width: 100%;
+  }
+
+  .game button {
+    width: 100%;
+    margin: auto;
+    padding: 0.2rem;
+    font-size: 1rem;
+  }
+}

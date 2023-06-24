@@ -4,6 +4,8 @@ Teste feito por Ivan Lima para desafio de estágio Frontend React para AppMaster
 
 ## Referência
 
+- O site pode ser encontrado em https://coding-challenge-appmasters.netlify.app/
+
  - Arquivo com as regras dadas pela empresa (https://app-masters.notion.site/Projeto-de-Est-gio-Frontend-React-34d8dcade9f74da29e5e1d4f0d6ef737)
 
 

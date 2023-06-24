@@ -11,14 +11,14 @@ Teste feito por Ivan Lima para desafio de estágio Frontend React para AppMaster
 
 ### Tela de Loading
 
-![print1](https://github.com/ivanlima096/coding-challenge-appmasters/assets/112594906/75847c2a-9697-41de-ae37-321d931581e8)
+![print1](https://github.com/ivanlima096/codingChallenge-appmasters/assets/112594906/08ab64e9-fc99-450b-8feb-951d1bf949dd)
+
 
 ### Tela com Apresentação dos Jogos
 
-![print1](https://github.com/ivanlima096/coding-challenge-appmasters/assets/112594906/f5111aa5-693f-4903-8cfc-fa6842a13316)
+![print2](https://github.com/ivanlima096/codingChallenge-appmasters/assets/112594906/cccef562-659d-4612-9bb2-ff9236cd6a74)
+
 
 ## Vídeo Demonstrativo
 
-
-https://github.com/ivanlima096/coding-challenge-appmasters/assets/112594906/1b6534cd-7dca-4a2e-a1e4-5034d1bde0e5
-
+https://github.com/ivanlima096/codingChallenge-appmasters/assets/112594906/963179ca-873b-4d56-a340-88846d9a9b68

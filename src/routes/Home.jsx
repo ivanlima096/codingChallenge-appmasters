@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
 import gameApiFetch from "../axios/config"
 import GameCard from "../components/GameCard"
 import SearchForm from "../components/SearchForm"

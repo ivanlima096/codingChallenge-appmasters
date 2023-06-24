@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 0rem;
+  position: relative;
 }
 
 .search-term,
@@ -18,24 +19,47 @@
 .search-genre select {
   padding: .5rem;
   border-radius: 10px;
-  border: 1px solid transparent;
+  border: none;
   width: 15rem;
   text-align: center;
   margin-bottom: 2rem;
+  margin-right: -20px;
+  height: 60px;
+  background-color: #F7D354;
+  font-weight: bold;
+}
+
+span {
+  height: 50px;
+  width: 1.8px;
+  border-radius: 50%;
+  background-color: #0d1621;
+  position: absolute;
+  top: 5px;
 }
 
 .search-term input:focus,
 .search-genre select:focus {
-  border: 1px solid blue;
+  border: none;
+  outline: none;
 }
 
+
 .search-term input::placeholder,
-.search-genre select {
-  font-size: .9rem;
+.search-genre select,
+.search-genre option {
+  font-size: 1rem;
+  color: #232323;
+  font-weight: bold;
 }
 
 @media (max-width: 570px) {
   .search-container {
     flex-direction: column;
   }
+
+  span {
+    display: none
+  }
+
 }

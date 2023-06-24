@@ -8,7 +8,7 @@
   object-fit: contain;
   padding: .4rem;
   border-radius: 10px;
-  width: 26rem;
+  width: 30%;
   box-shadow: 14px 10px 15px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -54,9 +54,28 @@
   color: #F7D354;
 }
 
-@media (max-width: 570px) {
+@media (max-width: 800px) {
   .game {
     max-width: 100%;
+    min-width: 40%;
+  }
+
+  .game h2 {
+    font-size: 1.2rem;
+  }
+
+  .game button {
+    width: 100%;
+    margin: auto;
+    padding: 0.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .game {
+    max-width: 100%;
+    min-width: 100%;
   }
 
   .game button {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 .loader {
   border: 8px solid #fbf8b9;
   /* Light grey */
@@ -24,8 +26,10 @@ h1,
 .error-message {
   display: flex;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin: 1rem;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.08rem;
 }
 
 .error-message {
@@ -40,7 +44,7 @@ h1,
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 1.2rem;
-  max-width: 95vw;
+  max-width: 90vw;
   margin: 0 auto;
   gap: 1.5rem;
 }

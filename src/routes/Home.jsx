@@ -77,7 +77,7 @@ export default function Home() {
       ) : (
         <div className="games-container">
           {filteredGames.map((game) => (
-            <GameCard key={game.id} title={game.title} genre={game.genre} thumbnail={game.thumbnail} />
+            <GameCard key={game.id} title={game.title} genre={game.genre} thumbnail={game.thumbnail} game_url={game.game_url} />
           ))}
         </div>
       )}

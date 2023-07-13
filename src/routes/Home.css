@@ -44,7 +44,7 @@ h1,
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 1.2rem;
-  max-width: 90vw;
+  max-width: 80vw;
   margin: 0 auto;
   gap: 1.5rem;
 }

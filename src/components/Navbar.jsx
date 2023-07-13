@@ -15,6 +15,7 @@ export default function Navbar() {
       </div>
       <ul>
         <li><Link to={"/"}>Home</Link> </li>
+        <li><Link to={"/auth"}>Login</Link> </li>
         <li><a href="https://www.linkedin.com/in/ivan-lima-dev/" target="_blank">< FaLinkedinIn /></a></li>
         <li><a href="https://github.com/ivanlima096" target="_blank">< FaGithub /></a></li>
         <li><a href="https://drive.google.com/file/d/1wEXAyjiYbv0yeUiVuH0xJaLoO9mue3GC/view?usp=drive_link" target="_blank"><FaFileDownload /></a></li>

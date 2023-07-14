@@ -1,32 +1,29 @@
 import { FaGamepad } from 'react-icons/fa'
 import './Login.css'
 import { Link } from 'react-router-dom'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useState } from 'react'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '../services/firebaseConfig'
 
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const [
-    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
     user,
     loading,
     error
-  ] = useSignInWithEmailAndPassword(auth)
+  ] = useCreateUserWithEmailAndPassword(auth)
 
-  function handleSignIn(e) {
+  function handleRegister(e) {
     e.preventDefault()
-    signInWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(email, password)
   }
 
   if (loading) {
-    return <div className='loader'></div>
-  }
-  if (user) {
-    return console.log(user);
+    return <p>carregando...</p>
   }
 
   return (
@@ -34,7 +31,7 @@ export default function Login() {
       <div className="loginContainer">
         <header className="header">
           <FaGamepad className='icon' />
-          <p> Faça login para sua conta gamer!</p>
+          <p> Preencha os dados para criar sua conta gamer!</p>
         </header>
         <form>
           <div className="inputContainer">
@@ -46,15 +43,14 @@ export default function Login() {
             <input type="password" name='password' id='password' placeholder='***********' onChange={e => setPassword(e.target.value)} />
           </div>
 
-          <a href="">Esqueceu sua senha?</a>
-          <button className='button' onClick={handleSignIn}>
-            Entrar!
+          <button className='button' onClick={handleRegister}>
+            Criar!
 
           </button>
 
           <div className="footer">
-            <p>Ainda não tem uma conta?</p>
-            <Link to={"/register"}>Cadastre-se agora!</Link>
+            <p>Já possui uma conta?</p>
+            <Link to={"/auth"}>Fazer login agora!</Link>
           </div>
         </form>
       </div>

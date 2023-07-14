@@ -55,6 +55,15 @@
   box-shadow: 2px 5px 2px 2px #121212;
 }
 
+.loginContainerLogged {
+  font-size: 2rem;
+  line-height: 3.2rem;
+}
+
+.loginContainerLogged a {
+  color: #F7D354;
+}
+
 .loginContainer .header {
   display: flex;
   flex-direction: column;
@@ -119,7 +128,8 @@
   color: #F7D354;
 }
 
-.container form .button {
+.container form .button,
+.loginContainerLogged button {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -3,7 +3,16 @@ import gameApiFetch from '../axios/config';
 import GameCard from '../components/GameCard';
 import SearchForm from '../components/SearchForm';
 import { FaExclamationTriangle, FaRegHeart, FaSort } from 'react-icons/fa';
-import { collection, getDocs, query, doc, onSnapshot, getDoc } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  query,
+  doc,
+  onSnapshot,
+  setDoc,
+  deleteDoc,
+  getDoc,
+} from 'firebase/firestore';
 import { firestore, auth } from '../services/firebaseConfig';
 import './Home.css';
 
@@ -29,10 +38,9 @@ export default function Home() {
       const res = await gameApiFetch.get('/data');
       clearTimeout(timer);
       const data = res.data;
-      console.log(data);
       const gamesWithFavorites = data.map((game) => ({
         ...game,
-        favoriteGames: []
+        favoriteGames: [], // Adicione a propriedade favoriteGames aos jogos
       }));
       setGames(gamesWithFavorites);
       setLoading(false);
@@ -106,37 +114,11 @@ export default function Home() {
     return searchTermMatch && genreFilterMatch;
   });
 
-  const handleToggleFavorites = (game) => {
+  const handleToggleFavorites = () => {
     if (user) {
-      const gameDocRef = doc(firestore, 'favorites', game.title);
-
-      if (game.favoriteGames.includes(user.uid)) {
-        const updatedFavoriteGames = game.favoriteGames.filter((userId) => userId !== user.uid);
-        setDoc(gameDocRef, { favoriteGames: updatedFavoriteGames }, { merge: true })
-          .catch((error) => {
-            console.log('Erro ao remover o usuário da lista de favoritos:', error);
-          });
-      } else {
-        const updatedFavoriteGames = [...game.favoriteGames, user.uid];
-        setDoc(gameDocRef, { favoriteGames: updatedFavoriteGames }, { merge: true })
-          .catch((error) => {
-            console.log('Erro ao adicionar o usuário à lista de favoritos:', error);
-          });
-      }
+      setShowFavorites((prevShowFavorites) => !prevShowFavorites);
     } else {
-      alert('Usuário não está autenticado');
-    }
-  };
-
-  const handleRatingChange = async (game, value) => {
-    if (user) {
-      const gameDocRef = doc(firestore, 'ratings', game.title);
-      await setDoc(gameDocRef, { rating: value }, { merge: true })
-        .catch((error) => {
-          console.log('Erro ao atualizar a nota do jogo:', error);
-        });
-    } else {
-      alert('Usuário não está autenticado');
+      console.log('Usuário não está autenticado');
     }
   };
 
@@ -211,8 +193,7 @@ export default function Home() {
               thumbnail={game.thumbnail}
               game_url={game.game_url}
               favoriteGames={game.favoriteGames}
-              handleToggleFavorites={() => handleToggleFavorites(game)}
-              handleRatingChange={(value) => handleRatingChange(game, value)}
+              user={user} // Pass the user object as a prop to the GameCard component
             />
           ))}
         </div>

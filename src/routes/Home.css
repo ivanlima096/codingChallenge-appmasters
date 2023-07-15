@@ -61,7 +61,7 @@ h1,
   margin-right: 1rem;
   margin-left: 1rem;
   font-size: .8rem;
-  color: #232323;
+  color: #f9f9f9d7;
   padding: 1.1rem .2rem;
   border: none;
   width: 9rem;
@@ -70,13 +70,19 @@ h1,
   background-color: transparent;
   font-weight: 500;
   cursor: pointer;
-  background-color: #f5f3d5;
-  box-shadow: 2px 2px 2px 2px black;
+  background-color: transparent;
+  box-shadow: 2px 2px 8px 1px #121212;
   border-radius: 1rem;
 }
 
 .favoritesBtn:hover,
 .sortBtn:hover {
-  background-color: #F7D354;
-  transition: 300ms all ease;
+  color: #F7D354;
+  transition: 200ms all ease-out;
+  scale: 1.05;
+}
+
+.icon-heart,
+.icon-sort {
+  font-size: 1.2rem;
 }

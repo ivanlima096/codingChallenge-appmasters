@@ -11,7 +11,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { firestore } from '../services/firebaseConfig';
+import { firestore, auth } from '../services/firebaseConfig';
 
 import './GameCard.css';
 
@@ -19,6 +19,7 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
   const [isFavorite, setIsFavorite] = useState(false);
   const [rating, setRating] = useState(0);
   const [isRated, setIsRated] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleRatingChange = async (value) => {
     try {
@@ -56,26 +57,36 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
     fetchRating();
   }, []);
 
-  const handleToggleFavorite = () => {
-    const gameDocRef = doc(firestore, 'favorites', title);
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
 
-    if (isFavorite) {
-      // Remover o jogo favorito do Firestore
-      deleteDoc(gameDocRef)
-        .catch((error) => {
+    return () => unsubscribe();
+  }, []);
+
+  const handleToggleFavorite = () => {
+    if (user) {
+      const gameDocRef = doc(firestore, 'favorites', title);
+
+      if (isFavorite) {
+        // Remove the favorite game from Firestore
+        deleteDoc(gameDocRef).catch((error) => {
           console.log('Erro ao remover o jogo favorito:', error);
         });
-    } else {
-      // Adicionar o jogo favorito ao Firestore
-      setDoc(gameDocRef, {
-        title,
-        genre,
-        thumbnail,
-        game_url,
-      })
-        .catch((error) => {
+      } else {
+        // Add the game as a favorite to Firestore
+        setDoc(gameDocRef, {
+          title,
+          genre,
+          thumbnail,
+          game_url,
+        }).catch((error) => {
           console.log('Erro ao adicionar o jogo favorito:', error);
         });
+      }
+    } else {
+      console.log('Usuário não está autenticado');
     }
   };
 

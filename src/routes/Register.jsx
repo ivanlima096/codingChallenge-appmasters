@@ -1,41 +1,41 @@
-import { FaGamepad } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '../services/firebaseConfig';
+import { FaGamepad } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { auth } from '../services/firebaseConfig'
 
-import './Login.css';
+import './Login.css'
 
 export default function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   const [
     createUserWithEmailAndPassword,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  ] = useCreateUserWithEmailAndPassword(auth)
 
   function handleRegister(e) {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-        setLoading(false);
+        const user = userCredential.user
+        setUser(user)
+        setLoading(false)
       })
       .catch((error) => {
-        setError("Erro ao criar conta, tente novamente!");
-        setLoading(false);
-      });
+        setError("Erro ao criar conta, tente novamente!")
+        setLoading(false)
+      })
   }
 
 
   if (loading) {
-    return <div className='loader'></div>;
+    return <div className='loader'></div>
   }
 
   if (user) {
@@ -43,10 +43,10 @@ export default function Register() {
       <div className="login">
         <div className="loginContainerLogged">
           <p>Sua conta foi criada com sucesso!</p>
-          <Link to="/auth">Faça login agora!</Link>
+          <Link to="/">Veja a lista de jogos!</Link>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -92,5 +92,5 @@ export default function Register() {
         </form>
       </div>
     </div>
-  );
+  )
 }

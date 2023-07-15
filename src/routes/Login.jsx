@@ -1,66 +1,66 @@
-import { FaGamepad } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useState, useEffect } from 'react';
-import { auth } from '../services/firebaseConfig';
+import { FaGamepad } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useState, useEffect } from 'react'
+import { auth } from '../services/firebaseConfig'
 
-import './Login.css';
+import './Login.css'
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
   const [
     signInWithEmailAndPassword,
-  ] = useSignInWithEmailAndPassword(auth);
+  ] = useSignInWithEmailAndPassword(auth)
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUser(user);
-        setLoading(false);
+        setUser(user)
+        setLoading(false)
       } else {
-        setUser(null);
-        setLoading(false);
+        setUser(null)
+        setLoading(false)
       }
-    });
+    })
 
     return () => {
-      unsubscribe();
-    };
-  }, []);
+      unsubscribe()
+    }
+  }, [])
 
   function handleSignIn(e) {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
     signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-        setLoading(false);
+        const user = userCredential.user
+        setUser(user)
+        setLoading(false)
       })
       .catch((error) => {
-        setError(error.message);
-        setLoading(false);
-      });
+        setError(error.message)
+        setLoading(false)
+      })
   }
 
   function handleLogout() {
     auth.signOut()
       .then(() => {
-        setUser(null);
+        setUser(null)
       })
       .catch((error) => {
-        console.log(error);
-      });
+        console.log(error)
+      })
   }
 
   if (loading) {
-    return <div className='loader'></div>;
+    return <div className='loader'></div>
   }
 
   if (user) {
@@ -73,7 +73,7 @@ export default function Login() {
           <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -118,5 +118,5 @@ export default function Login() {
         </form>
       </div>
     </div>
-  );
+  )
 }

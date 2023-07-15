@@ -12,7 +12,6 @@
   text-align: center;
   flex-direction: column;
   gap: .5rem;
-  margin-bottom: 0.3rem;
 }
 
 .search-term input,
@@ -22,7 +21,7 @@
   border: none;
   width: 15rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: .8rem;
   margin-right: -20px;
   height: 60px;
   background-color: #F7D354;
@@ -51,6 +50,7 @@ span {
   font-size: 1rem;
   color: #232323;
   font-weight: bold;
+  cursor: pointer;
 }
 
 @media (max-width: 570px) {

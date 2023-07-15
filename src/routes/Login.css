@@ -60,6 +60,24 @@
   line-height: 3.2rem;
 }
 
+.loginContainerLogged::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 35%;
+  right: 0;
+  bottom: 10%;
+  background-image: url("../img/bgLogin.jpg");
+  border-radius: 1.4rem;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  filter: blur(1.8px);
+  z-index: -1;
+  box-shadow: 2px 5px 2px 2px #121212;
+  width: 30%;
+}
+
 .loginContainerLogged a {
   color: #F7D354;
 }
@@ -94,6 +112,7 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  width: 80%;
 }
 
 .container form .inputContainer label {
@@ -101,13 +120,14 @@
   font-size: 1rem;
   line-height: 1.1rem;
   margin-bottom: .5rem;
+
 }
 
 .container form .inputContainer input {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 1.5rem 4rem;
+  padding: 1.5rem 1rem;
   width: 100%;
   height: 3rem;
   border: none;
@@ -149,7 +169,12 @@
   text-decoration: none;
 }
 
-.container form .button:hover {
+.loginContainerLogged button {
+  width: 100%;
+}
+
+.container form .button:hover,
+.loginContainerLogged button:hover {
   background-color: transparent;
   color: #F7D354;
 }
@@ -160,4 +185,38 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+}
+
+.loginContainerLogged .icon-check {
+  margin: 0 auto;
+  width: 100%;
+  color: #F7D354;
+}
+
+@media (max-width: 1024px) {
+  .loginContainerLogged::before {
+    left: 25%;
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginContainerLogged::before {
+    left: 15%;
+    width: 70%;
+  }
+}
+
+@media (max-width: 620px) {
+  .loginContainerLogged::before {
+    left: 5%;
+    width: 90%;
+  }
+}
+
+@media (max-width: 425px) {
+  .loginContainerLogged {
+    font-size: 1.5rem;
+    line-height: 3.2rem;
+  }
 }

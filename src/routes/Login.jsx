@@ -1,4 +1,4 @@
-import { FaGamepad } from 'react-icons/fa'
+import { FaGamepad, FaRegCheckCircle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { useState, useEffect } from 'react'
@@ -67,6 +67,7 @@ export default function Login() {
     return (
       <div className="login">
         <div className="loginContainerLogged">
+          <FaRegCheckCircle className='icon-check' />
           <p>Você já está logado.</p>
           <Link to="/">Ir para a página inicial</Link>
           <br />

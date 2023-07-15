@@ -1,10 +1,19 @@
 import { useState, useEffect } from 'react';
 import { FaHeart, FaExternalLinkAlt, FaStar } from 'react-icons/fa';
 
-import { doc, onSnapshot, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  onSnapshot,
+  setDoc,
+  deleteDoc,
+  getDoc,
+  collection,
+  query,
+  where,
+} from 'firebase/firestore';
 import { firestore } from '../services/firebaseConfig';
 
-import "./GameCard.css";
+import './GameCard.css';
 
 export default function GameCard({ title, genre, thumbnail, game_url, favoriteGames }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -13,7 +22,7 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
 
   const handleRatingChange = async (value) => {
     try {
-      const gameDocRef = doc(firestore, 'ratings', title);
+      const gameDocRef = doc(firestore, 'games', title);
       await setDoc(gameDocRef, { rating: value }, { merge: true });
     } catch (error) {
       console.log('Erro ao atualizar a nota do jogo:', error);
@@ -22,7 +31,7 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
 
   const fetchRating = async () => {
     try {
-      const gameDocRef = doc(firestore, 'ratings', title);
+      const gameDocRef = doc(firestore, 'games', title);
       const gameDocSnapshot = await getDoc(gameDocRef);
       const gameData = gameDocSnapshot.data();
       if (gameData && gameData.rating) {
@@ -76,7 +85,7 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
       <h2>{title}</h2>
       <hr></hr>
       <div className="upperPart">
-        <div className='leftPart'>
+        <div className="leftPart">
           <h5>{genre}</h5>
         </div>
         <div className="rightPart">
@@ -89,13 +98,13 @@ export default function GameCard({ title, genre, thumbnail, game_url, favoriteGa
               />
             ))}
           </div>
-          <button onClick={handleToggleFavorite} className='heartBtn'>
+          <button onClick={handleToggleFavorite} className="heartBtn">
             {isFavorite ? <FaHeart className="icon-full" /> : <FaHeart className="icon-empty" />}
           </button>
         </div>
       </div>
       <a href={game_url} target="_blank" rel="noopener noreferrer">
-        <button className='details'>
+        <button className="details">
           Ver Detalhes <FaExternalLinkAlt className="icon" />
         </button>
       </a>

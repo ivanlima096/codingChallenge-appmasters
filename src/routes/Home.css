@@ -60,15 +60,23 @@ h1,
 .sortBtn {
   margin-right: 1rem;
   margin-left: 1rem;
-  font-size: 1rem;
-  color: #f9f9f9;
-  padding: .2rem;
+  font-size: .8rem;
+  color: #232323;
+  padding: 1.1rem .2rem;
   border: none;
-  border-bottom: 1px solid #F7D354;
-  width: 12rem;
+  width: 9rem;
   text-align: center;
   margin-bottom: 2.5rem;
   background-color: transparent;
-  font-weight: 400;
+  font-weight: 500;
   cursor: pointer;
+  background-color: #f5f3d5;
+  box-shadow: 2px 2px 2px 2px black;
+  border-radius: 1rem;
+}
+
+.favoritesBtn:hover,
+.sortBtn:hover {
+  background-color: #F7D354;
+  transition: 300ms all ease;
 }

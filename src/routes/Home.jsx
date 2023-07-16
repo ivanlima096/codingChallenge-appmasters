@@ -24,23 +24,16 @@ export default function Home() {
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('');
   const [showFavorites, setShowFavorites] = useState(false);
-  const [fetchingFavorites, setFetchingFavorites] = useState(true);
   const [sortOrder, setSortOrder] = useState('asc');
   const [user, setUser] = useState(null);
 
   const getGames = async () => {
-    const timer = setTimeout(() => {
-      setError('A requisição demorou mais de 5 segundos. Tente novamente.');
-      setLoading(false);
-    }, 5100);
-
     try {
       const res = await gameApiFetch.get('/data');
-      clearTimeout(timer);
       const data = res.data;
       const gamesWithFavorites = data.map((game) => ({
         ...game,
-        favoriteGames: [], // Adicione a propriedade favoriteGames aos jogos
+        favorite: false,
       }));
       setGames(gamesWithFavorites);
       setLoading(false);
@@ -48,7 +41,6 @@ export default function Home() {
       const uniqueGenres = [...new Set(data.map((game) => game.genre))];
       setGenres(uniqueGenres);
     } catch (error) {
-      clearTimeout(timer);
       if (
         error.response &&
         [500, 502, 503, 504, 507, 508, 509].includes(error.response.status)
@@ -75,26 +67,21 @@ export default function Home() {
 
         const favoriteGames = favoritesSnapshot.docs.map((doc) => doc.data().title);
 
-        const gamesWithRating = await Promise.all(
-          favoriteGames.map(async (game) => {
-            const gameDocRef = doc(firestore, 'games', game);
-            const gameDocSnapshot = await getDoc(gameDocRef);
-            const gameData = gameDocSnapshot.data();
-            return { ...gameData, title: game };
-          })
-        );
+        const gamesWithFavorites = games.map((game) => ({
+          ...game,
+          favorite: favoriteGames.includes(game.title),
+        }));
 
-        setGames(gamesWithRating);
-        setFetchingFavorites(false); // Definir fetchingFavorites como false quando a busca estiver concluída
+        setGames(gamesWithFavorites);
       } catch (error) {
         console.log('Erro ao buscar jogos favoritos:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (fetchingFavorites) {
-      fetchFavorites();
-    }
-  }, [fetchingFavorites]);
+    fetchFavorites();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -118,7 +105,7 @@ export default function Home() {
     if (user) {
       setShowFavorites((prevShowFavorites) => !prevShowFavorites);
     } else {
-      console.log('Usuário não está autenticado');
+      alert('Usuário não está autenticado');
     }
   };
 
@@ -135,7 +122,9 @@ export default function Home() {
     }
   });
 
-  const displayedGames = showFavorites ? sortedGames.filter((game) => game.favoriteGames.length > 0) : sortedGames;
+  const displayedGames = showFavorites
+    ? sortedGames.filter((game) => game.favorite)
+    : sortedGames;
 
   return (
     <div className="container">
@@ -192,8 +181,8 @@ export default function Home() {
               genre={game.genre}
               thumbnail={game.thumbnail}
               game_url={game.game_url}
-              favoriteGames={game.favoriteGames}
-              user={user} // Pass the user object as a prop to the GameCard component
+              favorite={game.favorite}
+              user={user}
             />
           ))}
         </div>
